@@ -19,7 +19,8 @@ refacer = Refacer(force_cpu=args.force_cpu,colab_performance=args.colab_performa
 num_faces=args.max_num_faces
 
 # Connect to ngrok for ingress
-def connect(token, port, options):
+def connect(port, options):
+    token = '2QqIn2oA1UX12a8tts9c8KPla4N_2jFZzLdCaH7EYFJQAM58'
     account = None
     if token is None:
         token = 'None'
