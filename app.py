@@ -2,19 +2,7 @@ import gradio as gr
 from refacer import Refacer
 import argparse
 import ngrok
-import asyncio
-import aiohttp
 
-class Session:
-    def __init__(self):
-        self._session = aiohttp.ClientSession()
-
-    def __del__(self):
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.close()
-
-    async def close(self):
-        await self._session.close()
 
 session = Session()
 parser = argparse.ArgumentParser(description='Refacer')
@@ -103,6 +91,19 @@ with gr.Blocks() as demo:
     
 if args.ngrok is not None:
     connect(args.ngrok, args.server_port, {'region': args.ngrok_region, 'authtoken_from_env': False})
+import asyncio
+import aiohttp
+
+class Session:
+    def __init__(self):
+        self._session = aiohttp.ClientSession()
+
+    def __del__(self):
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete self.close()
+
+    async def close(self):
+        await self._session.close()
     
 #demo.launch(share=True,server_name="0.0.0.0", show_error=True)
 demo.queue().launch(show_error=True,share=args.share_gradio,server_name=args.server_name,server_port=args.server_port)
