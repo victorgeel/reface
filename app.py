@@ -2,7 +2,21 @@ import gradio as gr
 from refacer import Refacer
 import argparse
 import ngrok
+import asyncio
+import aiohttp
 
+class Session:
+    def __init__(self):
+        self._session = aiohttp.ClientSession()
+
+    def __del__(self):
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.close()
+
+    async def close(self):
+        await self._session.close()
+
+session = Session()
 parser = argparse.ArgumentParser(description='Refacer')
 parser.add_argument("--max_num_faces", type=int, help="Max number of faces on UI", default=5)
 parser.add_argument("--force_cpu", help="Force CPU mode", default=False, action="store_true")
